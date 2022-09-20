@@ -1,7 +1,7 @@
-import './App.css'
+import CalculatorPanel from './components/UI/CalculatorPanel';
 
 function App() {
-  return <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+  return <CalculatorPanel></CalculatorPanel>;
 }
 
-export default App
+export default App;

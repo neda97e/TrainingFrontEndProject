@@ -1,8 +1,8 @@
 enum OPERATOR {
   SUM = '+',
   SUB = '-',
-  MULT = '*',
-  DIV = '/',
+  MULT = 'x',
+  DIV = '÷',
   EQU = '=',
   CLC = 'C'
 }

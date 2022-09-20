@@ -6,7 +6,7 @@ const Input: React.FC<{ classes: string }> = (props) => {
 
   const getInputText = () => {
     const enteredText = inputRef.current!.value;
-    if (enteredText.trim().length === 0) return;
+    if (enteredText.trim().length === 0) return enteredText;
   };
 
   const setInputTextValue = (text: string) => {

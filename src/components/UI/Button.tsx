@@ -1,15 +1,38 @@
 import React from 'react';
 import ButtonSt from '../../models/ButtonSt';
+import BUTTONTYPE from '../../models/ButtonType';
+import OPERATOR from '../../models/Operator';
 
-const Button: React.FC<{ but: ButtonSt; onClick: () => void }> = (props) => {
+const Button: React.FC<{
+  btn: ButtonSt;
+  onClick: (event: React.FormEvent) => void;
+}> = (props) => {
+  const getButtonClasses = () => {
+    if (
+      props.btn.type === BUTTONTYPE.OPERATOR &&
+      props.btn.text === OPERATOR.EQU
+    ) {
+      return 'text-white border-2 border-blue-600 bg-blue-500 row-span-4';
+    } else if (
+      props.btn.type === BUTTONTYPE.OPERATOR &&
+      props.btn.text === OPERATOR.CLC
+    ) {
+      return 'text-neutral-700 border-2 border-neutral-200 bg-neutral-100 h-[50px]';
+    } else if (props.btn.type === BUTTONTYPE.OPERATOR) {
+      return 'text-neutral-700 border-2 border-neutral-400 bg-neutral-300 h-[50px]';
+    } else {
+      return 'text-neutral-700 border-2 border-neutral-200 bg-neutral-100 h-[50px]';
+    }
+  };
+
   return (
     <button
       type='button'
-      id={props.but.id}
-      className={`${props.but.bgColor} ${props.but.textColor} w-full h-full`}
+      id={props.btn.id}
+      className={getButtonClasses()}
       onClick={props.onClick}
     >
-      {props.but.text}
+      {props.btn.text}
     </button>
   );
 };

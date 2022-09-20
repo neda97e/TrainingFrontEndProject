@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-const Input = () => {
+const Input: React.FC<{ classes: string }> = (props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputText, setInputText] = useState('');
 
@@ -15,7 +15,7 @@ const Input = () => {
 
   return (
     <input
-      className='border-gray-500'
+      className={props.classes}
       ref={inputRef}
       type='text'
       value={inputText}

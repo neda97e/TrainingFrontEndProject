@@ -1,6 +1,6 @@
-enum BUTTONTYPE {
-  OPERATOR = 'OPT',
-  OPERAND = 'OPR'
+enum ButtonType {
+  OPERATOR = 'opt',
+  OPERAND = 'opr'
 }
 
-export default BUTTONTYPE;
+export default ButtonType;

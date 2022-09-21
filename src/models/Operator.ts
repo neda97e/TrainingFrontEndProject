@@ -1,4 +1,4 @@
-enum OPERATOR {
+enum Operator {
   SUM = '+',
   SUB = '-',
   MULT = 'x',
@@ -7,4 +7,4 @@ enum OPERATOR {
   CLC = 'C'
 }
 
-export default OPERATOR;
+export default Operator;

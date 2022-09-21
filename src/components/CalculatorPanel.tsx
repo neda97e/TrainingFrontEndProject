@@ -1,41 +1,36 @@
 import React, { useState } from 'react';
 import Button from './Button';
-import OPERATOR from '../../models/Operator';
-import ButtonSt from '../../models/ButtonSt';
-import BUTTONTYPE from '../../models/ButtonType';
+import Operator from '../models/Operator';
+import ButtonSt from '../models/ButtonSt';
+import ButtonType from '../models/ButtonType';
 
-const operators: string[] = [
-  OPERATOR.SUM,
-  OPERATOR.SUB,
-  OPERATOR.MULT,
-  OPERATOR.DIV
-];
+const fourMainOps: string[] = Object.values(Operator).slice(0, 4);
 
 const calcButtons: ButtonSt[] = [
-  new ButtonSt('op1', OPERATOR.SUM, BUTTONTYPE.OPERATOR),
-  new ButtonSt('op2', OPERATOR.SUB, BUTTONTYPE.OPERATOR),
-  new ButtonSt('op3', OPERATOR.MULT, BUTTONTYPE.OPERATOR),
-  new ButtonSt('op4', OPERATOR.DIV, BUTTONTYPE.OPERATOR),
-  new ButtonSt('num7', '7', BUTTONTYPE.OPERAND),
-  new ButtonSt('num8', '8', BUTTONTYPE.OPERAND),
-  new ButtonSt('num9', '9', BUTTONTYPE.OPERAND),
-  new ButtonSt('op5', OPERATOR.EQU, BUTTONTYPE.OPERATOR),
-  new ButtonSt('num4', '4', BUTTONTYPE.OPERAND),
-  new ButtonSt('num5', '5', BUTTONTYPE.OPERAND),
-  new ButtonSt('num6', '6', BUTTONTYPE.OPERAND),
-  new ButtonSt('num1', '1', BUTTONTYPE.OPERAND),
-  new ButtonSt('num2', '2', BUTTONTYPE.OPERAND),
-  new ButtonSt('num3', '3', BUTTONTYPE.OPERAND),
-  new ButtonSt('num0', '0', BUTTONTYPE.OPERAND),
-  new ButtonSt('dot', '.', BUTTONTYPE.OPERAND),
-  new ButtonSt('op6', OPERATOR.CLC, BUTTONTYPE.OPERATOR)
+  new ButtonSt(Operator.SUM, ButtonType.OPERATOR),
+  new ButtonSt(Operator.SUB, ButtonType.OPERATOR),
+  new ButtonSt(Operator.MULT, ButtonType.OPERATOR),
+  new ButtonSt(Operator.DIV, ButtonType.OPERATOR),
+  new ButtonSt('7', ButtonType.OPERAND),
+  new ButtonSt('8', ButtonType.OPERAND),
+  new ButtonSt('9', ButtonType.OPERAND),
+  new ButtonSt(Operator.EQU, ButtonType.OPERATOR),
+  new ButtonSt('4', ButtonType.OPERAND),
+  new ButtonSt('5', ButtonType.OPERAND),
+  new ButtonSt('6', ButtonType.OPERAND),
+  new ButtonSt('1', ButtonType.OPERAND),
+  new ButtonSt('2', ButtonType.OPERAND),
+  new ButtonSt('3', ButtonType.OPERAND),
+  new ButtonSt('0', ButtonType.OPERAND),
+  new ButtonSt('.', ButtonType.OPERAND),
+  new ButtonSt(Operator.CLC, ButtonType.OPERATOR)
 ];
 
 const CalculatorPanel = () => {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState<string>('');
 
   const getIndexOfOperator = () => {
-    const results = operators.filter(
+    const results: string[] = fourMainOps.filter(
       (operator) => inputText.indexOf(operator) > 0
     );
     return results.length > 0 ? inputText.indexOf(results[0]) : -1;
@@ -54,13 +49,13 @@ const CalculatorPanel = () => {
       operationIndex + 1
     );
     switch (operator) {
-      case OPERATOR.SUM:
+      case Operator.SUM:
         return firstNumber + secondNumber;
-      case OPERATOR.SUB:
+      case Operator.SUB:
         return firstNumber - secondNumber;
-      case OPERATOR.DIV:
+      case Operator.DIV:
         return firstNumber / secondNumber;
-      case OPERATOR.MULT:
+      case Operator.MULT:
         return firstNumber * secondNumber;
     }
   };
@@ -73,20 +68,20 @@ const CalculatorPanel = () => {
     const text: string = button.textContent!;
 
     // When press 'C'
-    if (text === OPERATOR.CLC) {
+    if (text === Operator.CLC) {
       setInputText('');
     }
     // When press '='
-    else if (text === OPERATOR.EQU) {
+    else if (text === Operator.EQU) {
       if (inputText.length > 0) {
         const calculationRes: number = calculateResult(-1)!;
         setInputText(calculationRes.toString());
       }
     }
     // When press '+', '-', 'x', '÷'
-    else if (type === BUTTONTYPE.OPERATOR) {
+    else if (type === ButtonType.OPERATOR) {
       // User can't import operator at begining or after another operator
-      if (inputText.length > 0 && !operators.includes(inputText.slice(-1))) {
+      if (inputText.length > 0 && !fourMainOps.includes(inputText.slice(-1))) {
         // If there is an operator in the expression it goes for calculation
         // then setting new operation
         const index: number = getIndexOfOperator();

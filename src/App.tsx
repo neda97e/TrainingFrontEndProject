@@ -1,4 +1,4 @@
-import CalculatorPanel from './components/UI/CalculatorPanel';
+import CalculatorPanel from './components/CalculatorPanel';
 
 function App() {
   return <CalculatorPanel />;

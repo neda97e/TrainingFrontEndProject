@@ -11,7 +11,7 @@ const operators: string[] = [
   OPERATOR.DIV
 ];
 
-const calcButtons = [
+const calcButtons: ButtonSt[] = [
   new ButtonSt('op1', OPERATOR.SUM, BUTTONTYPE.OPERATOR),
   new ButtonSt('op2', OPERATOR.SUB, BUTTONTYPE.OPERATOR),
   new ButtonSt('op3', OPERATOR.MULT, BUTTONTYPE.OPERATOR),
@@ -35,11 +35,10 @@ const CalculatorPanel = () => {
   const [inputText, setInputText] = useState('');
 
   const getIndexOfOperator = () => {
-    operators.map((operator) => {
-      let index: number = inputText.indexOf(operator);
-      if (index > 0) return index;
-    });
-    return -1;
+    const results = operators.filter(
+      (operator) => inputText.indexOf(operator) > 0
+    );
+    return results.length > 0 ? inputText.indexOf(results[0]) : -1;
   };
 
   const calculateResult = (operationIndex: number) => {
@@ -79,7 +78,10 @@ const CalculatorPanel = () => {
     }
     // When press '='
     else if (text === OPERATOR.EQU) {
-      if (inputText.length > 0) calculateResult(-1);
+      if (inputText.length > 0) {
+        const calculationRes: number = calculateResult(-1)!;
+        setInputText(calculationRes.toString());
+      }
     }
     // When press '+', '-', 'x', '÷'
     else if (type === BUTTONTYPE.OPERATOR) {
@@ -91,8 +93,8 @@ const CalculatorPanel = () => {
         if (index > 0) {
           const calculationRes: number = calculateResult(index)!;
           setInputText(calculationRes.toString());
-          setInputText((_inputText) => `${_inputText}${text}`);
         }
+        setInputText((_inputText) => `${_inputText}${text}`);
       }
     }
     // When press number

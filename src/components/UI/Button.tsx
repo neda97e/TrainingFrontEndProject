@@ -5,7 +5,7 @@ import OPERATOR from '../../models/Operator';
 
 const Button: React.FC<{
   btn: ButtonSt;
-  onClick: (event: React.FormEvent) => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }> = (props) => {
   const getButtonClasses = () => {
     if (
@@ -28,7 +28,8 @@ const Button: React.FC<{
   return (
     <button
       type='button'
-      id={props.btn.id}
+      id={props.btn.key}
+      value={props.btn.type}
       className={getButtonClasses()}
       onClick={props.onClick}
     >

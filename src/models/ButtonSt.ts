@@ -1,11 +1,11 @@
 class ButtonSt {
-  id: string;
+  key: string;
   type: string;
   text: string;
   // onClick: () => any;
 
-  constructor(id: string, text: string, type: string) {
-    this.id = id;
+  constructor(key: string, text: string, type: string) {
+    this.key = key;
     this.text = text;
     this.type = type;
   }

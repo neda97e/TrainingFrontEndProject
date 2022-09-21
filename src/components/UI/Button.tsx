@@ -28,7 +28,7 @@ const Button: React.FC<{
   return (
     <button
       type='button'
-      key={props.btn.key}
+      id={props.btn.key}
       value={props.btn.type}
       className={getButtonClasses()}
       onClick={props.onClick}
